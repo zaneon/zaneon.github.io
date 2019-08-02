@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="总结我工作中常用的GIT命令">
+<meta name="description" content="总结工作中常用的GIT命令">
 <meta name="keywords" content="git">
 <meta property="og:type" content="article">
 <meta property="og:title" content="GIT常用命令大全">
 <meta property="og:url" content="https://zaneon.github.io/2019/08/02/GIT常用命令大全/index.html">
 <meta property="og:site_name" content="杨木木">
-<meta property="og:description" content="总结我工作中常用的GIT命令">
+<meta property="og:description" content="总结工作中常用的GIT命令">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-08-02T07:44:17.000Z">
+<meta property="og:updated_time" content="2019-08-02T08:10:58.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="GIT常用命令大全">
-<meta name="twitter:description" content="总结我工作中常用的GIT命令">
+<meta name="twitter:description" content="总结工作中常用的GIT命令">
 
 
 
@@ -321,12 +321,13 @@
 
       
         <blockquote>
-<p>总结我工作中常用的GIT命令</p>
+<p>总结工作中常用的GIT命令</p>
 </blockquote>
 <a id="more"></a>
 
 <h4 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h4><p><code>git config --global user.name [name]</code> - 设置全局用户名<br><code>git config --global user.email [email]</code> - 设置全局邮箱<br><code>git config --local user.name [name]</code> - 设置当前项目用户名<br><code>git config --local user.email [email]</code> - 设置当前项目邮箱<br><code>git config --global list</code> - 查看全局配置<br><code>git config --local list</code> - 查看当前项目配置<br><code>ssh-keygen -t rsa -C &quot;email&quot;</code> - 生成ssh密钥</p>
 <h4 id="新建仓库"><a href="#新建仓库" class="headerlink" title="新建仓库"></a>新建仓库</h4><p><code>git init</code> - 在当前目录初始化一个git仓库<br><code>git clone [url]</code> - 在当前目录克隆一个项目</p>
+<h4 id="添加-删除文件"><a href="#添加-删除文件" class="headerlink" title="添加/删除文件"></a>添加/删除文件</h4><p><code>git add [file] [dir] ...</code> - 添加指定文件或目录到暂存区<br><code>git add .</code> - 添加当前目录所有文件到暂存区<br><code>git add -u [file]</code> - 将修改的、删除的文件添加到暂存区，排除新增的文件<br><code>git rm [file]</code> - 删除文件并将删除放进暂存区<br><code>git rm --cached [file]</code> - 停止追踪文件，不删除<br><code>git mv [file-original] [file-renamed]</code> - 文件重命名</p>
 
       
     </div>
@@ -338,7 +339,7 @@
 
     
       <div>
-        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+        <div style="padding: 30px 0 10px 0; margin: 20px auto; width: 90%; text-align: center;">
   <div style="color: #777; padding-bottom: 10px;">谢谢你请我喝阔落~</div>
   <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
     <span>打赏</span>
@@ -432,15 +433,9 @@
 </div>
 
 
-  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
 
 
 
-  <span class="post-meta-divider">|</span>
-
-
-
-  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
 
 
 
