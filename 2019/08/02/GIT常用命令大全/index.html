@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="杨木木">
 <meta property="og:description" content="总结工作中常用的GIT命令">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-08-02T08:10:58.000Z">
+<meta property="og:updated_time" content="2019-08-06T01:36:41.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="GIT常用命令大全">
 <meta name="twitter:description" content="总结工作中常用的GIT命令">
@@ -327,7 +327,9 @@
 
 <h4 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h4><p><code>git config --global user.name [name]</code> - 设置全局用户名<br><code>git config --global user.email [email]</code> - 设置全局邮箱<br><code>git config --local user.name [name]</code> - 设置当前项目用户名<br><code>git config --local user.email [email]</code> - 设置当前项目邮箱<br><code>git config --global list</code> - 查看全局配置<br><code>git config --local list</code> - 查看当前项目配置<br><code>ssh-keygen -t rsa -C &quot;email&quot;</code> - 生成ssh密钥</p>
 <h4 id="新建仓库"><a href="#新建仓库" class="headerlink" title="新建仓库"></a>新建仓库</h4><p><code>git init</code> - 在当前目录初始化一个git仓库<br><code>git clone [url]</code> - 在当前目录克隆一个项目</p>
-<h4 id="添加-删除文件"><a href="#添加-删除文件" class="headerlink" title="添加/删除文件"></a>添加/删除文件</h4><p><code>git add [file] [dir] ...</code> - 添加指定文件或目录到暂存区<br><code>git add .</code> - 添加当前目录所有文件到暂存区<br><code>git add -u [file]</code> - 将修改的、删除的文件添加到暂存区，排除新增的文件<br><code>git rm [file]</code> - 删除文件并将删除放进暂存区<br><code>git rm --cached [file]</code> - 停止追踪文件，不删除<br><code>git mv [file-original] [file-renamed]</code> - 文件重命名</p>
+<h4 id="添加-删除文件"><a href="#添加-删除文件" class="headerlink" title="添加/删除文件"></a>添加/删除文件</h4><p><code>git add [file] [dir] ...</code> - 添加指定文件或目录到暂存区<br><code>git add .</code> - 添加当前目录所有文件到暂存区<br><code>git add -u [file]</code> - 将修改的、删除的文件添加到暂存区，排除新增的文件<br><code>git rm [file]</code> - 删除文件并将删除放进暂存区<br><code>git rm --cached [file]</code> - 停止追踪文件，不删除<br><code>git mv [file-original] [file-renamed]</code> - 文件重命名  </p>
+<h4 id="代码提交"><a href="#代码提交" class="headerlink" title="代码提交"></a>代码提交</h4><p><code>git commit [file1] [file2] ... -m [message]</code> - 提交指定文件到仓库<br><code>git commit -m [message]</code> - 提交所有暂存区文件到仓库<br><code>git commit -am [message]</code> - 直接提交工作区文件到仓库<br><code>git commit -v</code> - 提交时显示所有diff信息  </p>
+<h4 id="分支"><a href="#分支" class="headerlink" title="分支"></a>分支</h4><p><code>git branch</code> - 列出本地所有分支<br><code>git branch -r</code> - 列出远程所有分支<br><code>git branch -a</code> - 列出本地和远程所有分支<br><code>git branch [name]</code> - 新建一个分支<br><code>git checkout -b [name]</code> - 新建一个分支并切换到该分支<br><code>git branch [name] [commit]</code> - 在指定commit上新建一个分支<br><code>git checkout [name]</code> - 切换到指定分支<br><code>git merge [name]</code> - 合并指定分支到当前分支<br><code>git cherry-pick [commit]</code> - 合并指定commit到当前分支<br><code>git branch -d [name]</code> - 删除分支  </p>
 
       
     </div>
