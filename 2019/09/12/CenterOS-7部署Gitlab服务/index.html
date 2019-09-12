@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT">
+  <meta name="keywords" content="git,">
 
 
 
@@ -79,14 +79,20 @@
 
 
 
-<meta name="keywords" content="前端,JS,JAVASCRIPT,TS,TYPESCRIPT,NODE.JS">
-<meta property="og:type" content="website">
-<meta property="og:title" content="杨木木">
-<meta property="og:url" content="https://zaneon.github.io/index.html">
+<meta name="description" content="最近用持续集成提升一下效率，发现github的私有项目好像不能用Travis CI，于是想自己在服务器部署gitlab，通过一番折腾搞定了。环境是阿里云的CenterOS 7.xxx。">
+<meta name="keywords" content="git">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CenterOS 7部署Gitlab服务">
+<meta property="og:url" content="https://zaneon.github.io/2019/09/12/CenterOS-7部署Gitlab服务/index.html">
 <meta property="og:site_name" content="杨木木">
+<meta property="og:description" content="最近用持续集成提升一下效率，发现github的私有项目好像不能用Travis CI，于是想自己在服务器部署gitlab，通过一番折腾搞定了。环境是阿里云的CenterOS 7.xxx。">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://zaneon.github.io/.io//Jietu20190912-162201.png">
+<meta property="og:updated_time" content="2019-09-12T08:31:39.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="杨木木">
+<meta name="twitter:title" content="CenterOS 7部署Gitlab服务">
+<meta name="twitter:description" content="最近用持续集成提升一下效率，发现github的私有项目好像不能用Travis CI，于是想自己在服务器部署gitlab，通过一番折腾搞定了。环境是阿里云的CenterOS 7.xxx。">
+<meta name="twitter:image" content="https://zaneon.github.io/.io//Jietu20190912-162201.png">
 
 
 
@@ -116,13 +122,13 @@
 
 
 
-  <link rel="canonical" href="https://zaneon.github.io/">
+  <link rel="canonical" href="https://zaneon.github.io/2019/09/12/CenterOS-7部署Gitlab服务/">
 
 
 
 
 
-  <title>杨木木</title>
+  <title>CenterOS 7部署Gitlab服务 | 杨木木</title>
   
 
 
@@ -141,8 +147,7 @@
     
   
 
-  <div class="container sidebar-position-left 
-  page-home">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -235,9 +240,9 @@
         <div class="content-wrap">
           <div id="content" class="content">
             
-  <section id="posts" class="posts-expand">
+
+  <div id="posts" class="posts-expand">
     
-      
 
   
 
@@ -267,9 +272,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/09/12/CenterOS-7部署Gitlab服务/" itemprop="url">CenterOS 7部署Gitlab服务</a></h1>
+          <h1 class="post-title" itemprop="name headline">CenterOS 7部署Gitlab服务</h1>
         
 
         <div class="post-meta">
@@ -319,18 +322,17 @@
       
 
       
-        
-          <blockquote>
+        <blockquote>
 <p>最近用持续集成提升一下效率，发现github的私有项目好像不能用Travis CI，于是想自己在服务器部署gitlab，通过一番折腾搞定了。<br>环境是阿里云的CenterOS 7.xxx。</p>
 </blockquote>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2019/09/12/CenterOS-7部署Gitlab服务/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
+<a id="more"></a>
+
+<h4 id="安装相关依赖"><a href="#安装相关依赖" class="headerlink" title="安装相关依赖"></a>安装相关依赖</h4><p><code>sudo yum install curl policycoreutils openssh-server openssh-clients</code><br><code>sudo systemctl enable sshd</code><br><code>sudo systemctl start sshd</code><br><code>sudo yum install postfix</code><br><code>sudo systemctl enable postfix</code><br><code>sudo systemctl start postfix</code><br><code>sudo firewall-cmd --permanent --add-service=http</code><br><code>sudo systemctl reload firewalld</code><br>安装ssh和postfix服务，启用postfix需要自行配置。</p>
+<h4 id="下载gitlab安装包"><a href="#下载gitlab安装包" class="headerlink" title="下载gitlab安装包"></a>下载gitlab安装包</h4><p><code>curl -sS https://packages.gitlab.com/install/repositories/gitlab/gitlab-ce/script.rpm.sh | sudo bash</code> - 添加gitlab的源<br><code>sudo yum install gitlab-ce</code> - 下载安装gitlab社区版   </p>
+<h4 id="gitlab常用命令"><a href="#gitlab常用命令" class="headerlink" title="gitlab常用命令"></a>gitlab常用命令</h4><p><code>gitlab-ctl reconfigure</code> - 重新应用gitlab配置<br><code>gitlab-ctl start</code> - 启动gitlab服务<br><code>gitlab-ctl restart</code> - 重启gitlab服务<br><code>gitlab-ctl status</code> - 查看gitlab运行状态<br><code>gitlab-ctl stop</code> - 停止gitlab服务  </p>
+<p>至此gitlab就安装好了，接下来需要配置自定义域名。<br>因为gitlab自带的服务就是nginx如果你本机安装了nginx就会冲突，需要关掉gitlab的nginx用本机的nginx代理。  </p>
+<h4 id="配置nginx反向代理"><a href="#配置nginx反向代理" class="headerlink" title="配置nginx反向代理"></a>配置nginx反向代理</h4><p>修改 <code>/etc/gitlab/gitlab.rb</code> 文件<br><code>vim /etc/gitlab/gitlab.rb</code><br>将 <code>nginx[&#39;enable&#39;] = true</code> 改为 <code>nginx[&#39;enable&#39;] = false</code><br>允许gitlab监听TCP端口，继续编辑 <code>/etc/gitlab/gitlab.rb</code> 文件<br><code>gitlab_workhorse[&#39;listen_network&#39;] = &quot;tcp&quot;</code><br><code>gitlab_workhorse[&#39;listen_addr&#39;] = &quot;127.0.0.1:8181&quot;</code><br><img src="/.io//Jietu20190912-162201.png" alt="允许gitlab监听TCP端口"></p>
+
       
     </div>
     
@@ -340,145 +342,70 @@
     
 
     
+      <div>
+        <div style="padding: 30px 0 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div style="color: #777; padding-bottom: 10px;">谢谢你请我喝阔落~</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/assets/img/wechat.jpg" alt="杨木木 微信支付">
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/assets/img/alipay.jpg" alt="杨木木 支付宝">
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
 
     
 
     <footer class="post-footer">
       
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://zaneon.github.io/2019/08/02/GIT常用命令大全/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="杨木木">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="杨木木">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/08/02/GIT常用命令大全/" itemprop="url">GIT常用命令大全</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-08-02T15:18:53+08:00">
-                2019-08-02
-              </time>
-            
-
-            
-
-            
-          </span>
-
+        <div class="post-tags">
           
-
+            <a href="/tags/git/" rel="tag"># git</a>
           
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
         </div>
-      </header>
-    
+      
 
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
+      
       
       
 
       
-        
-          <blockquote>
-<p>总结工作中常用的GIT命令</p>
-</blockquote>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2019/08/02/GIT常用命令大全/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/08/02/GIT常用命令大全/" rel="next" title="GIT常用命令大全">
+                <i class="fa fa-chevron-left"></i> GIT常用命令大全
+              </a>
+            
           </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
 
-    
+          <span class="post-nav-divider"></span>
 
-    
-
-    
-
-    <footer class="post-footer">
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
       
 
       
-
-      
-
-      
-      
-        <div class="post-eof"></div>
       
     </footer>
   </div>
@@ -488,10 +415,11 @@
   </article>
 
 
-    
-  </section>
 
-  
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -499,6 +427,10 @@
 
 
           
+
+  
+
+
 
         </div>
         
@@ -631,6 +563,10 @@
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 
